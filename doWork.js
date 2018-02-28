@@ -19,5 +19,5 @@ function calculateAverage (oData) {
 	aData.forEach(function (iElement) {
 		sum += iElement;
 	});
-	return sum;
+	return sum / aData.length;
 }

@@ -13,7 +13,8 @@ self.addEventListener('message', function(e) {
 
 
 
-function calculateAverage (aData) {
+function calculateAverage (oData) {
+	var aData = oData.data;
 	var sum = 0;
 	aData.forEach(function (iElement) {
 		sum += iElement;

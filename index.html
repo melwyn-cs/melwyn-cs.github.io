@@ -1,16 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>React Snake</title>
-    <link rel="stylesheet" href="appbuild/start.css">
-</head>
-<body>
-    <div id="container">
-    </div>
-    <div id="contextId">
+ <input type="number" id="number"/>
+ <button onclick="genarateRandomArray()">Generate</button>
 
-    </div>
-    <script type="text/javascript" src="appbuild/start.js"></script>
-</body>
-</html>
+ <br/><button onclick="startComputation()">Start computation</button>
+
+ <span id="array"></span>
+ <br/>
+ <br/>
+ <span id="result"></span>
+ <script src="doWork.js"></script>
+<script>
+  var aGeneratedArray = [];
+  
+  function genarateRandomArray () {
+	var value = document.getElementById("number").value;
+	for (var i=0;i<value;i++) {
+		aGeneratedArray.push(parseInt(Math.random() * 100));
+	}
+	displayArray();
+  }
+
+  function displayArray () {
+	var sArray = "";
+	for (var i=0;i<aGeneratedArray.length;i++) {
+		sArray += " " + aGeneratedArray[i];
+	}
+	document.getElementById("array").innerHTML = sArray;
+  }
+
+  function startComputation() {
+    worker.postMessage({'cmd': 'average', 'data': aGeneratedArray});
+  }
+  var worker = new Worker('doWork.js');
+  worker.addEventListener('message', function(e) {
+    console.log(e.data);
+	var resultDOM = document.getElementById("result");
+	resultDOM.innerHTML = "The Average is " + e.data;
+  }, false);
+  
+</script>
+

@@ -13,7 +13,7 @@ export default function (state = null, action) {
       let oLoginInfo = action.payload;
       let bIsUserLoggedIn = false;
 
-      if (oLoginInfo.userName === "shaadi" && oLoginInfo.password === "123") {
+      if (oLoginInfo.userName === oLoginInfo.password) {
         bIsUserLoggedIn = true;
       }
 

@@ -1,45 +1,14 @@
- <h3>Web Workers Example</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redux React Demo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.11.1/build/css/alertify.min.css"/>
+</head>
+<body>
 
- <input type="number" id="number"/>
- <button onclick="genarateRandomArray()">Generate</button>
+    <div id="root"></div>
+    <script src="js/bundle.min.js"></script>
 
- <br/><button onclick="startComputation()">Start computation</button>
-
- <span id="array"></span>
- <br/>
- <br/>
- <span id="result"></span>
- <script src="doWork.js"></script>
-<script>
-  var aGeneratedArray = [];
-  
-  function genarateRandomArray () {
-	aGeneratedArray = [];
-	var value = document.getElementById("number").value;
-	for (var i=0;i<value;i++) {
-		aGeneratedArray.push(parseInt(Math.random() * 100));
-	}
-	displayArray();
-  }
-
-  function displayArray () {
-	var sArray = "";
-	for (var i=0;i<aGeneratedArray.length;i++) {
-		sArray += " " + aGeneratedArray[i];
-	}
-	document.getElementById("array").innerHTML = "";
-	document.getElementById("array").innerHTML = sArray;
-  }
-
-  function startComputation() {
-    worker.postMessage({'cmd': 'average', 'data': aGeneratedArray});
-  }
-  var worker = new Worker('doWork.js');
-  worker.addEventListener('message', function(e) {
-    console.log(e.data);
-	var resultDOM = document.getElementById("result");
-	resultDOM.innerHTML = "The Average is " + e.data;
-  }, false);
-  
-</script>
-
+</body>
+</html>
